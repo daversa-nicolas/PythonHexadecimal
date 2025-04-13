@@ -1,15 +1,19 @@
 import re
 
-import numpy
+import numpy;
 
+from calculeNumerique.transformsSubroutines import transformsSubroutines;
 
 
 class Calcule:
 
+	obj_ClassTransforms = transformsSubroutines();
+
 	# 1EME DIM IS THE RECORDS ; ARRAYSTRING CORRESPONDANCE ALPHA 0_RANK _DECIMAL 1_RANK OF 2EME DIM ; OUTPUT 3EME DIM TO HEXA CONVERTION
 	def calculeBasisToArray(self,basisString, ARRAYS):
 
-		print(basisString)
+		# self.obj_ClassTransforms.renderMaj(basisString);
+
 		i=0;
 		while(i<len(basisString)):
 
@@ -35,12 +39,9 @@ class Calcule:
 
 		# END WHILE
 
-
 	# END DEF
 
 	def calculeHexaToArray(self, stringHexa, ARRAYH):
-
-		print(stringHexa)
 
 		i=0;
 		while (i < len(stringHexa)):
@@ -60,8 +61,6 @@ class Calcule:
 	# ASSIGNEMENT OF ENTERED STRING TO 2_RANK OF 2EME DIM ARRAYS
 	def calculeEnteredToArray(self, stringEntered, ARRAYS):
 
-		print(stringEntered)
-
 		i=0;
 		while(i<len(stringEntered)):
 			ARRAYS[i][2][0]=stringEntered[i];
@@ -70,22 +69,13 @@ class Calcule:
 
 	#END calculeEntered
 
-
-
-
-	# def outputCharString(self, iemeChar, stringEnteredUser):
-	#
-	# 	return stringEnteredUser[iemeChar]
-	#
-	# #END OUTPUT
-
 	# SUBROUTINE RETURN VOID
 	def convertAlphaToDecimal(self, ARRAYS):
 
 		# obj_calcule = Calcule()
 
 		i=0
-		print(ARRAYS.shape);
+		# print(ARRAYS.shape);
 
 		type(ARRAYS);
 
@@ -112,23 +102,24 @@ class Calcule:
 
 			verifyElement=self.functionIsEmptySpecial(j, (ARRAYS[j][0][0]),
 													  ARRAYS);
-
-			while(verifyElement):
-
-				if (ARRAYS[j][0][0]==ARRAYS[i][2][0]):
-
-					# IN THE SAME MATRIX EXTRATERRESTRIAL VIMANAS
-					# IF FOUNDED CHAR THE DECIMAL IS ASSIGNED IN 3 DIM
-					ARRAYS[i][3][0]=ARRAYS[j][1][0];
-					break;
-
-				#END IF
-
-				j = j + 1;
-				verifyElement = self.functionIsEmptySpecial(j, (ARRAYS[j][0][0]),
-															ARRAYS);
-
-			# END WHILE DO ... INNER LOOP 1
+			# REFACTORING OF PROGRAM
+			self.iemeAlphaMatchJemeDecimal(i, j, verifyElement, ARRAYS);
+			# while(verifyElement):
+			#
+			# 	if (ARRAYS[j][0][0]==ARRAYS[i][2][0]):
+			#
+			# 		# IN THE SAME MATRIX EXTRATERRESTRIAL VIMANAS
+			# 		# IF FOUNDED CHAR THE DECIMAL IS ASSIGNED IN 3 DIM
+			# 		ARRAYS[i][3][0]=ARRAYS[j][1][0];
+			# 		break;
+			#
+			# 	#END IF
+			#
+			# 	j = j + 1;
+			# 	verifyElement = self.functionIsEmptySpecial(j, (ARRAYS[j][0][0]),
+			# 												ARRAYS);
+			#
+			# # END WHILE DO ... INNER LOOP 1
 
 			i = i + 1;
 			verifyElement=self.functionIsEmptySpecial(i, (ARRAYS[i][2][0]),
@@ -139,6 +130,32 @@ class Calcule:
 		return None;
 
 	# END CONVERT
+
+
+	# VERIFY THE CONVERTION THE ALPHA ENTRY TO DECIMAL OUTPUT
+	def iemeAlphaMatchJemeDecimal(self, iEme: int, jEme: int, verifyElement: bool, ARRAYS: numpy.chararray) -> None:
+
+		while(verifyElement):
+
+			if (ARRAYS[jEme][0][0]==ARRAYS[iEme][2][0]):
+
+				# IN THE SAME MATRIX EXTRATERRESTRIAL VIMANAS
+				# IF FOUNDED CHAR THE DECIMAL IS ASSIGNED IN 3 DIM
+				ARRAYS[iEme][3][0]=ARRAYS[jEme][1][0];
+				break;
+
+			#END IF
+
+			jEme = jEme + 1;
+			verifyElement = self.functionIsEmptySpecial(jEme, (ARRAYS[jEme][0][0]),
+														ARRAYS);
+
+		# END WHILE DO ... INNER LOOP 1
+
+		return None;
+
+	# END FUNCTION iemeAlphaMatchJemeDecimal
+
 
 	# FUNCTION VERIFY EMPTY OR CHAR SPECIAL
 	# RETURN BOOLEAN TRUE IF NOT FOUND EMPTY OR SPECIAL
@@ -151,7 +168,6 @@ class Calcule:
 		if (varElement is None):
 
 			varElementBol=False;
-			print("Read empty");
 
 		#END IF
 
@@ -194,8 +210,8 @@ class Calcule:
 		listTemp=[];
 		#del listTemp[:];
 
-		# TEST
-		numberDecimal = 7956
+		# TESTING NUMBER
+		# numberDecimal = 7956
 		# numberQuotient = numberDecimal // 16;
 
 		# IN THE SAME MATRIX EXTRATERRESTRIAL VIMANAS
@@ -209,23 +225,23 @@ class Calcule:
 		verifyElement = self.functionIsEmptySpecial(i, (ARRAYS[i][3][0]),
 													ARRAYS);
 		while(verifyElement):
-#self.trasformStringToInt(self.trasformByteToString(ARRAYS[i][3][0]))
+			#self.trasformStringToInt(self.trasformByteToString(ARRAYS[i][3][0]))
 			listTemp = [];
 			del listTemp[:];
 			# self.assignementToListHexa(self.trasformStringToInt(self.trasformByteToString(ARRAYS[i][3][0])), listTemp);
 			self.assignementToListHexa(self.trasformStringToInt(ARRAYS[i][3][0]), listTemp);
-			print(listTemp);
+			# print(listTemp);
 			listTemp = self.leaveNullFromList(listTemp);
-			print(listTemp);
+			# print(listTemp);
 			listTemp = self.listPositionalToHexa(listTemp, ARRAYH);
 
 			j=0;
 			while (j<len(listTemp)):
 
 				# 3 DIM UTILISED TO ASSIGNEMENT THE j-EME ELEMENT HEXA FINAL CHAR ELEMENT TO iEME CHAR SAISI BY USER
-				# Z -> 26 -> .. TODO
+				# Z -> 26 -> TODO
 				ARRAYS[i][4][j]=listTemp[len(listTemp)-1-j];
-				print(listTemp[j]);
+				# print(listTemp[j]);
 
 				j=j+1;
 
@@ -253,8 +269,6 @@ class Calcule:
 
 		if (numberDec == 0):
 
-			print("stopping", listTemporary);
-
 			return None;
 
 		# END IF
@@ -267,10 +281,9 @@ class Calcule:
 
 	# END ASSIGNMENTLISTFUCNTION
 
-	# TRANSORM POSITIONAL TO HEXA
+	# TRANSFORM POSITIONAL TO HEXA
 	def decimalRestToHexaChar(self, rest, ARRAYH: numpy.chararray) -> str:
 
-		# TEST
 		return ARRAYH[rest-1];
 
 	# END DECIMAL
@@ -278,7 +291,6 @@ class Calcule:
 	# THE ELEMENT OF LIST IS THE POSITIONAL HEXA
 	def listPositionalToHexa(self, listTempArg: list, ARRAYH: numpy.chararray) -> list:
 
-		print(listTempArg);
 		obj_calcule = Calcule();
 
 		i=0;
@@ -286,7 +298,7 @@ class Calcule:
 		while(i<len(listTempArg)):
 
 			listTempArg[i]=obj_calcule.decimalRestToHexaChar(listTempArg[i], ARRAYH);
-			print(listTempArg);
+			# print(listTempArg);
 			i = i + 1;
 
 		# END WHILE
@@ -298,12 +310,14 @@ class Calcule:
 
 	# ERASE EMPTY VALUE
 	def leaveNullFromList(self, listTemp: list) -> list:
+
 		filteredList=list(filter(lambda v: v is not None, listTemp));
-		print(filteredList);
+
 		# OR filtered_list = list(filter(None, original_list))
 		# Use remove() to Filter None Values
 		#filter(lambda v: v is not None, L)
 		return filteredList;
+
 	# END LEAVE
 
 
@@ -313,8 +327,7 @@ class Calcule:
 
 	def trasformByteToInteger(self, varElementByte: bytes) -> int:
 		#return int.from_bytes(varElementByte, byteorder='little', signed=False);
-		return list(varElementByte)
-
+		return list(varElementByte);
 	# END TRANFORMBYTETOINT
 
 
@@ -326,6 +339,7 @@ class Calcule:
 
 
 	def outputOfMatrixForMortels(self, arrayList: list, ARRAYS: numpy.chararray)->list:
+
 		strHexa="";
 
 		i=0;
@@ -366,20 +380,21 @@ class Calcule:
 	# END OUTPUT
 
 
-
+	# CYRPTAGE FUNCTION
 	def cryptoElementSuliman(self, decalageGap: int, listElements: list, ARRAYS: numpy.chararray) -> list:
 
+		listCrypted=[];
 		# TRY FUNCTION PREVIOUS
-		i=0
+		i=0;
 		while (i < len(listElements)):
 
-			if (i + decalageGap < len(listElements)):
+			if ((i + decalageGap) < len(listElements)):
 
-				listElements[i + decalageGap] = listElements[i];
+				listCrypted.insert(i + decalageGap, listElements[i]);
 
 			else:
 
-				listElements[i - len(listElements)] = listElements[i];
+				listCrypted.insert(i - len(listElements) + decalageGap, listElements[i]);
 
 			# END IF
 
@@ -387,7 +402,8 @@ class Calcule:
 
 		# END WHILE
 
-		return listElements;
+		print ("THIS IS THE ARRAY LIST CRYPTED WITH : " + str(decalageGap) + " DECALAGE GAP");
+		return listCrypted;
 
 	# END CRYPTO
 
