@@ -46,12 +46,13 @@ def main():
 
 	print(listArray);
 
-	userInt=decalageCyrpto();
+	userInt = obj_Class.trasformStringToInt(decalageCyrpto(len(listArray)));
+
+	listCrypted=[];
 
 	# CYPTAGE ELEMENTS
-	# listArray=obj_Class.cryptoElementSuliman(userInt, listArray, ARRAYHEXA);
-
-
+	listCrypted=obj_Class.cryptoElementSuliman(userInt, listArray, ARRAYHEXA);
+	print(listCrypted);
 
 #ENDDEFMAIN
 
@@ -62,7 +63,7 @@ def enterStringUser():
 
 	while(bol==True):
 
-		var = input("Please enter something alphanumerique: ")
+		var = input("Please enter something alphanumerique WITHOUT SPACES or special: ")
 
 		if(bool(re.search("^(?=.*[a-zA-Z])[A-Za-z0-9]+$",var)) or
 				re.search("^(?=.*[0-9])[A-Za-z0-9]+$",var)):
@@ -83,9 +84,14 @@ def enterStringUser():
 
 
 
-def decalageCyrpto()->int:
-	varInt=input("Please enter le KEY DECALAGE DE CRYPTAGE CESAER : ");
+def decalageCyrpto(lenListArray: int)->int:
+
+
+	varInt=input("Please enter le KEY DECALAGE DE CRYPTAGE CESAER ENTRE 1 ET " +
+				 str(lenListArray-1) + "\n");
+
 	return varInt;
+
 # END DECALAGE
 
 
