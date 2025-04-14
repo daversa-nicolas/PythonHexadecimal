@@ -2,12 +2,15 @@ import numpy
 
 class transformsSubroutines:
 
-	# TODO
+	# convert message to uppercase
 	def renderMaj(self, strEntered:str) -> str:
 
-		return 0;
+		return strEntered.upper();
 
 	# END FUNCTION RENDERMAJ
+
+
+
 
 
 

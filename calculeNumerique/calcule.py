@@ -4,15 +4,13 @@ import numpy;
 
 from calculeNumerique.transformsSubroutines import transformsSubroutines;
 
-
 class Calcule:
 
+	# OBJETS CLASS GENERAL
 	obj_ClassTransforms = transformsSubroutines();
 
 	# 1EME DIM IS THE RECORDS ; ARRAYSTRING CORRESPONDANCE ALPHA 0_RANK _DECIMAL 1_RANK OF 2EME DIM ; OUTPUT 3EME DIM TO HEXA CONVERTION
-	def calculeBasisToArray(self,basisString, ARRAYS):
-
-		# self.obj_ClassTransforms.renderMaj(basisString);
+	def calculeBasisToArray(self, basisString, ARRAYS):
 
 		i=0;
 		while(i<len(basisString)):
@@ -53,13 +51,14 @@ class Calcule:
 
 		# END WHILE
 
-
 		return 0;
 
 	#ENDCALCULE
 
 	# ASSIGNEMENT OF ENTERED STRING TO 2_RANK OF 2EME DIM ARRAYS
-	def calculeEnteredToArray(self, stringEntered, ARRAYS):
+	def calculeEnteredToArray(self, stringEnteredNoUpper, ARRAYS):
+
+		stringEntered = self.obj_ClassTransforms.renderMaj(stringEnteredNoUpper);
 
 		i=0;
 		while(i<len(stringEntered)):
@@ -86,9 +85,41 @@ class Calcule:
 		# FUNCTION verifyElement THAT IS TRUE RETURN AT FIRST END REVERIFIED TO EACH ITERATION AT THE AND OF LOOP
 		verifyElement=self.functionIsEmptySpecial(i, (ARRAYS[i][2][0]),
 															 ARRAYS);
+		# REFACTORING OF PROGRAM
+		self.iEmeAlphaMatchTable(i, verifyElement, ARRAYS);
 
-		while(verifyElement):
+		# while(verifyElement):
+		#
+		# 	# POUR EXEMPLE ADZ1
+		# 	# ENTERED ADZ1 ASSOCIATED STRING 2 DIM
+		# 	# ALPHA ASSOCIATED 0 DIM
+		# 	# ARRAYS[i][0][0] = basisString[i]
+		# 	# NUMBER ASSOCIATED 1 DIM FOR BASIS
+		# 	# ARRAYS[i][1][0] = i + 1
+		# 	# NUMBER ASSIGNED IN 3 DIM FOR ENTERED
+		# 	# ARRAYS[i][3][0]
+		#
+		# 	j=0;
+		#
+		# 	verifyElement=self.functionIsEmptySpecial(j, (ARRAYS[j][0][0]),
+		# 											  ARRAYS);
+		# 	# REFACTORING OF PROGRAM
+		# 	self.iemeAlphaMatchJemeDecimal(i, j, verifyElement, ARRAYS);
+		#
+		# 	i = i + 1;
+		# 	verifyElement=self.functionIsEmptySpecial(i, (ARRAYS[i][2][0]),
+		# 											  ARRAYS);
+		#
+		# #END WHILE DO ... INNER LOOP 2
 
+		return None;
+
+	# END CONVERT
+
+	def iEmeAlphaMatchTable(self, i: int, verifyElement: bool,
+							ARRAYS: numpy.chararray) -> None:
+
+		while (verifyElement):
 			# POUR EXEMPLE ADZ1
 			# ENTERED ADZ1 ASSOCIATED STRING 2 DIM
 			# ALPHA ASSOCIATED 0 DIM
@@ -98,42 +129,26 @@ class Calcule:
 			# NUMBER ASSIGNED IN 3 DIM FOR ENTERED
 			# ARRAYS[i][3][0]
 
-			j=0;
+			j = 0;
 
-			verifyElement=self.functionIsEmptySpecial(j, (ARRAYS[j][0][0]),
-													  ARRAYS);
+			verifyElement = self.functionIsEmptySpecial(j, (ARRAYS[j][0][0]),
+														ARRAYS);
 			# REFACTORING OF PROGRAM
 			self.iemeAlphaMatchJemeDecimal(i, j, verifyElement, ARRAYS);
-			# while(verifyElement):
-			#
-			# 	if (ARRAYS[j][0][0]==ARRAYS[i][2][0]):
-			#
-			# 		# IN THE SAME MATRIX EXTRATERRESTRIAL VIMANAS
-			# 		# IF FOUNDED CHAR THE DECIMAL IS ASSIGNED IN 3 DIM
-			# 		ARRAYS[i][3][0]=ARRAYS[j][1][0];
-			# 		break;
-			#
-			# 	#END IF
-			#
-			# 	j = j + 1;
-			# 	verifyElement = self.functionIsEmptySpecial(j, (ARRAYS[j][0][0]),
-			# 												ARRAYS);
-			#
-			# # END WHILE DO ... INNER LOOP 1
 
 			i = i + 1;
-			verifyElement=self.functionIsEmptySpecial(i, (ARRAYS[i][2][0]),
-													  ARRAYS);
+			verifyElement = self.functionIsEmptySpecial(i, (ARRAYS[i][2][0]),
+														ARRAYS);
 
-		#END WHILE DO ... INNER LOOP 2
+		# END WHILE DO ... INNER LOOP 2
 
 		return None;
 
-	# END CONVERT
-
+	# END IEMEALPHAMATCH
 
 	# VERIFY THE CONVERTION THE ALPHA ENTRY TO DECIMAL OUTPUT
-	def iemeAlphaMatchJemeDecimal(self, iEme: int, jEme: int, verifyElement: bool, ARRAYS: numpy.chararray) -> None:
+	def iemeAlphaMatchJemeDecimal(self, iEme: int, jEme: int, verifyElement: bool,
+								  ARRAYS: numpy.chararray) -> None:
 
 		while(verifyElement):
 
