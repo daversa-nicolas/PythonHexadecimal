@@ -9,8 +9,11 @@ class Calcule:
 	# OBJETS CLASS GENERAL
 	obj_ClassTransforms = transformsSubroutines();
 
+	# GENERAL LIST FOR MINIMAL DIMENTION
+	listGeneralDim=[];
+
 	# 1EME DIM IS THE RECORDS ; ARRAYSTRING CORRESPONDANCE ALPHA 0_RANK _DECIMAL 1_RANK OF 2EME DIM ; OUTPUT 3EME DIM TO HEXA CONVERTION
-	def calculeBasisToArray(self, basisString, ARRAYS):
+	def calculeBasisToArray(self, basisString, ARRAYS) -> None:
 
 		i=0;
 		while(i<len(basisString)):
@@ -37,9 +40,14 @@ class Calcule:
 
 		# END WHILE
 
+		self.listGeneralDim.append(len(basisString));
+
+		return None;
+
 	# END DEF
 
-	def calculeHexaToArray(self, stringHexa, ARRAYH):
+
+	def calculeHexaToArray(self, stringHexa, ARRAYH) -> None :
 
 		i=0;
 		while (i < len(stringHexa)):
@@ -51,12 +59,14 @@ class Calcule:
 
 		# END WHILE
 
-		return 0;
+		self.listGeneralDim.append(len(stringHexa));
+
+		return None;
 
 	#ENDCALCULE
 
 	# ASSIGNEMENT OF ENTERED STRING TO 2_RANK OF 2EME DIM ARRAYS
-	def calculeEnteredToArray(self, stringEnteredNoUpper, ARRAYS):
+	def calculeEnteredToArray(self, stringEnteredNoUpper, ARRAYS) -> None :
 
 		stringEntered = self.obj_ClassTransforms.renderMaj(stringEnteredNoUpper);
 
@@ -66,7 +76,18 @@ class Calcule:
 			i=i+1;
 		#END WHILE
 
+		self.listGeneralDim.append(len(stringEntered));
+
+		return None;
+
 	#END calculeEntered
+
+	# FUNCTION TO OUTPUT MINIMAL DIMENSION OF RESIZE ARRAY
+	def dimMinimalEntered(self, listGeneralDim: list) -> int:
+		# TODO TESITNG
+		return min(listGeneralDim);
+
+	# END FUCNTION
 
 	# SUBROUTINE RETURN VOID
 	def convertAlphaToDecimal(self, ARRAYS):
@@ -217,7 +238,7 @@ class Calcule:
 	#
 	# #END TRANSFORM
 
-	def tranformDecimalToHexa(self, ARRAYS: numpy.chararray, ARRAYH: numpy.chararray):
+	def tranformDecimalToHexa(self, ARRAYS: numpy.chararray, ARRAYH: numpy.chararray) -> None:
 
 		# obj_calcule = Calcule()
 
