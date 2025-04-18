@@ -23,7 +23,7 @@ class Calcule:
 			#re.search("hi", "abcdefghijkl")
 			if (match):
 
-				# ORIGINAL STRING 0 DIM
+				# ORIGINAL STRING 0 DIM  OF 36 CHARS
 				ARRAYS[i][0][0]=basisString[i]
 				# NUMBER ASSOCIATED 1 DIM
 				ARRAYS[i][1][0]=i+1
@@ -40,7 +40,7 @@ class Calcule:
 
 		# END WHILE
 
-		self.listGeneralDim.append(len(basisString));
+		#self.listGeneralDim.append(len(basisString));
 
 		return None;
 
@@ -59,7 +59,7 @@ class Calcule:
 
 		# END WHILE
 
-		self.listGeneralDim.append(len(stringHexa));
+		#self.listGeneralDim.append(len(stringHexa));
 
 		return None;
 
@@ -76,20 +76,30 @@ class Calcule:
 			i=i+1;
 		#END WHILE
 
-		self.listGeneralDim.append(len(stringEntered));
+		#self.listGeneralDim.append(len(stringEntered));
 
 		return None;
 
 	#END calculeEntered
 
 	# FUNCTION TO OUTPUT MINIMAL DIMENSION OF RESIZE ARRAY
-	def dimMinimalEntered(self, listGeneralDim: list) -> int:
+	def dimMaximalEntered(self, listGeneralDim: list) -> int:
+
 		# TODO TESITNG
-		return min(listGeneralDim);
+		print(listGeneralDim);
+
+		return max(listGeneralDim);
 
 	# END FUCNTION
 
-	# SUBROUTINE RETURN VOID
+	# SUBROUTINE TO RESIZE UNSIZE ARRAY
+	def resizeUndimentionalArray(self, ARRAYS: numpy.chararray) -> None:
+
+		return None;
+
+	# END SUBROUTINE
+
+
 	def convertAlphaToDecimal(self, ARRAYS):
 
 		# obj_calcule = Calcule()

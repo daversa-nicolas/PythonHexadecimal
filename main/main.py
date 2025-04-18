@@ -5,6 +5,8 @@ import re
 from calculeNumerique.calcule import Calcule
 
 ARRAYSTRING = np.empty((100, 5, 10), dtype= np.chararray, order='F')
+# DYNAMICALLA NUMPY ARRAY UNDFINITED
+#ARRAYSTRING = np.empty((), dtype= np.chararray, order='F')
 ARRAYHEXA = np.empty((16), dtype= np.chararray, order='F')
 basis_string="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 hexa_string="123456789ABCDEF"
@@ -13,9 +15,22 @@ hexa_string="123456789ABCDEF"
 obj_Class=Calcule()
 
 
+
 def main():
 
 	i=0
+
+	# ENTER STRING
+	userString=enterStringUser();
+
+	# DEFINE DIMENTION OF ARRAY
+	# TODO
+	obj_Class.buildinList(userString);
+	obj_Class.buildinList(basis_string);
+	obj_Class.buildinList(hexa_string);
+
+	## DEFINE MAX OF DIM
+	obj_Class.dimMaximalEntered();
 
 	# ASSIGNEMENT HEXA TO ARRAYH
 	obj_Class.calculeHexaToArray(hexa_string, ARRAYHEXA)
@@ -23,11 +38,8 @@ def main():
 	# ASSIGNEMENT BASIS TO ARRAYS
 	obj_Class.calculeBasisToArray(basis_string, ARRAYSTRING)
 
-	# ENTER STRING
-	userString=enterStringUser();
-
 	# ASSIGNEMENT ENTERED_STRING TO ARRAYS
-	obj_Class.calculeEnteredToArray(userString,ARRAYSTRING)
+	obj_Class.calculeEnteredToArray(userString, ARRAYSTRING)
 
 	# CALCULE zone 51
 	decimalFounded=0;
@@ -79,6 +91,7 @@ def enterStringUser():
 		#ENDIF
 
 	# END WHILE
+
 #END enter
 
 
