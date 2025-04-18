@@ -1,6 +1,6 @@
 import re
 
-import numpy;
+import numpy as np;
 
 from calculeNumerique.transformsSubroutines import transformsSubroutines;
 
@@ -8,9 +8,6 @@ class Calcule:
 
 	# OBJETS CLASS GENERAL
 	obj_ClassTransforms = transformsSubroutines();
-
-	# GENERAL LIST FOR MINIMAL DIMENTION
-	listGeneralDim=[];
 
 	# 1EME DIM IS THE RECORDS ; ARRAYSTRING CORRESPONDANCE ALPHA 0_RANK _DECIMAL 1_RANK OF 2EME DIM ; OUTPUT 3EME DIM TO HEXA CONVERTION
 	def calculeBasisToArray(self, basisString, ARRAYS) -> None:
@@ -82,6 +79,25 @@ class Calcule:
 
 	#END calculeEntered
 
+	# BUILDING LIST TEMP OF DIM MAX (iDimMax,5,10)
+	def buildinList(self, strDim: int, listTempDim) -> None :
+
+		listTempDim.append(len(strDim));
+
+	# END SUBROUTINE
+
+	# SUBROUTINE TO RESIZE UNSIZE ARRAY
+	def resizeUndimentionalArray(self, listTempDim, ARRAYS: np.chararray) -> np.chararray:
+
+		maxDim: int=0;
+		print(maxDim);
+
+		ARRAYS = np.empty((self.dimMaximalEntered(listTempDim), 5, 10), dtype=np.chararray, order='F')
+
+		return ARRAYS;
+
+	# END SUBROUTINE
+
 	# FUNCTION TO OUTPUT MINIMAL DIMENSION OF RESIZE ARRAY
 	def dimMaximalEntered(self, listGeneralDim: list) -> int:
 
@@ -91,13 +107,6 @@ class Calcule:
 		return max(listGeneralDim);
 
 	# END FUCNTION
-
-	# SUBROUTINE TO RESIZE UNSIZE ARRAY
-	def resizeUndimentionalArray(self, ARRAYS: numpy.chararray) -> None:
-
-		return None;
-
-	# END SUBROUTINE
 
 
 	def convertAlphaToDecimal(self, ARRAYS):
@@ -119,36 +128,12 @@ class Calcule:
 		# REFACTORING OF PROGRAM
 		self.iEmeAlphaMatchTable(i, verifyElement, ARRAYS);
 
-		# while(verifyElement):
-		#
-		# 	# POUR EXEMPLE ADZ1
-		# 	# ENTERED ADZ1 ASSOCIATED STRING 2 DIM
-		# 	# ALPHA ASSOCIATED 0 DIM
-		# 	# ARRAYS[i][0][0] = basisString[i]
-		# 	# NUMBER ASSOCIATED 1 DIM FOR BASIS
-		# 	# ARRAYS[i][1][0] = i + 1
-		# 	# NUMBER ASSIGNED IN 3 DIM FOR ENTERED
-		# 	# ARRAYS[i][3][0]
-		#
-		# 	j=0;
-		#
-		# 	verifyElement=self.functionIsEmptySpecial(j, (ARRAYS[j][0][0]),
-		# 											  ARRAYS);
-		# 	# REFACTORING OF PROGRAM
-		# 	self.iemeAlphaMatchJemeDecimal(i, j, verifyElement, ARRAYS);
-		#
-		# 	i = i + 1;
-		# 	verifyElement=self.functionIsEmptySpecial(i, (ARRAYS[i][2][0]),
-		# 											  ARRAYS);
-		#
-		# #END WHILE DO ... INNER LOOP 2
-
 		return None;
 
 	# END CONVERT
 
 	def iEmeAlphaMatchTable(self, i: int, verifyElement: bool,
-							ARRAYS: numpy.chararray) -> None:
+							ARRAYS: np.chararray) -> None:
 
 		while (verifyElement):
 			# POUR EXEMPLE ADZ1
@@ -179,7 +164,7 @@ class Calcule:
 
 	# VERIFY THE CONVERTION THE ALPHA ENTRY TO DECIMAL OUTPUT
 	def iemeAlphaMatchJemeDecimal(self, iEme: int, jEme: int, verifyElement: bool,
-								  ARRAYS: numpy.chararray) -> None:
+								  ARRAYS: np.chararray) -> None:
 
 		while(verifyElement):
 
@@ -205,7 +190,8 @@ class Calcule:
 
 	# FUNCTION VERIFY EMPTY OR CHAR SPECIAL
 	# RETURN BOOLEAN TRUE IF NOT FOUND EMPTY OR SPECIAL
-	def functionIsEmptySpecial(self, emeElement: int, varElement, ARRAYS: numpy.chararray) -> bool:
+	def functionIsEmptySpecial(self, emeElement: int, varElement, ARRAYS: np.chararray) -> bool:
+
 		# TEST
 		# varElement='';
 		varElementBol=True;
@@ -216,17 +202,6 @@ class Calcule:
 			varElementBol=False;
 
 		#END IF
-
-		# else:
-		# strVar = varElement;
-		# END I+F
-
-		# IF ELEMENT IS BYTES, IT S MORE% THAN ONE CHAR PROBALBLT 99/100
-		# if len(strVar) > 1:
-		#
-		# 	varElementBol = False;
-		#
-		# # END IF
 
 		bool = (varElementBol and varElement != '')
 
@@ -248,7 +223,7 @@ class Calcule:
 	#
 	# #END TRANSFORM
 
-	def tranformDecimalToHexa(self, ARRAYS: numpy.chararray, ARRAYH: numpy.chararray) -> None:
+	def tranformDecimalToHexa(self, ARRAYS: np.chararray, ARRAYH: np.chararray) -> None:
 
 		# obj_calcule = Calcule()
 
@@ -328,14 +303,14 @@ class Calcule:
 	# END ASSIGNMENTLISTFUCNTION
 
 	# TRANSFORM POSITIONAL TO HEXA
-	def decimalRestToHexaChar(self, rest, ARRAYH: numpy.chararray) -> str:
+	def decimalRestToHexaChar(self, rest, ARRAYH: np.chararray) -> str:
 
 		return ARRAYH[rest-1];
 
 	# END DECIMAL
 
 	# THE ELEMENT OF LIST IS THE POSITIONAL HEXA
-	def listPositionalToHexa(self, listTempArg: list, ARRAYH: numpy.chararray) -> list:
+	def listPositionalToHexa(self, listTempArg: list, ARRAYH: np.chararray) -> list:
 
 		obj_calcule = Calcule();
 
@@ -384,7 +359,7 @@ class Calcule:
 	# END TRANFORMESTRINGTOINT
 
 
-	def outputOfMatrixForMortels(self, arrayList: list, ARRAYS: numpy.chararray)->list:
+	def outputOfMatrixForMortels(self, arrayList: list, ARRAYS: np.chararray)->list:
 
 		strHexa="";
 
@@ -427,7 +402,7 @@ class Calcule:
 
 
 	# CYRPTAGE FUNCTION
-	def cryptoElementSuliman(self, decalageGap: int, listElements: list, ARRAYS: numpy.chararray) -> list:
+	def cryptoElementSuliman(self, decalageGap: int, listElements: list, ARRAYS: np.chararray) -> list:
 
 		listCrypted=[];
 		# TRY FUNCTION PREVIOUS

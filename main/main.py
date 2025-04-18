@@ -4,9 +4,8 @@ import re
 
 from calculeNumerique.calcule import Calcule
 
-ARRAYSTRING = np.empty((100, 5, 10), dtype= np.chararray, order='F')
-# DYNAMICALLA NUMPY ARRAY UNDFINITED
-#ARRAYSTRING = np.empty((), dtype= np.chararray, order='F')
+# DYNAMICALLA NUMPY ARRAY UNDEFINITED
+ARRAYS = np.empty((), dtype= np.chararray, order='F')
 ARRAYHEXA = np.empty((16), dtype= np.chararray, order='F')
 basis_string="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 hexa_string="123456789ABCDEF"
@@ -20,17 +19,19 @@ def main():
 
 	i=0
 
+	listGeneralDim=[];
+
 	# ENTER STRING
 	userString=enterStringUser();
 
 	# DEFINE DIMENTION OF ARRAY
 	# TODO
-	obj_Class.buildinList(userString);
-	obj_Class.buildinList(basis_string);
-	obj_Class.buildinList(hexa_string);
+	obj_Class.buildinList(userString, listGeneralDim);
+	obj_Class.buildinList(basis_string, listGeneralDim);
+	obj_Class.buildinList(hexa_string, listGeneralDim);
 
-	## DEFINE MAX OF DIM
-	obj_Class.dimMaximalEntered();
+	# RESIZE TO DYNAMICAL ARRAY A MIMIMAL USED (iDim, 15, 10) RANK
+	ARRAYSTRING = obj_Class.resizeUndimentionalArray(listGeneralDim, ARRAYS);
 
 	# ASSIGNEMENT HEXA TO ARRAYH
 	obj_Class.calculeHexaToArray(hexa_string, ARRAYHEXA)
