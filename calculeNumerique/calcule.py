@@ -65,7 +65,9 @@ class Calcule:
 	# ASSIGNEMENT OF ENTERED STRING TO 2_RANK OF 2EME DIM ARRAYS
 	def calculeEnteredToArray(self, stringEnteredNoUpper, ARRAYS) -> None :
 
-		stringEntered = self.obj_ClassTransforms.renderMaj(stringEnteredNoUpper);
+		stringEntered = self.obj_ClassTransforms.renderMaj(
+			self.obj_ClassTransforms.renderNoSpaces(stringEnteredNoUpper)
+		);
 
 		i=0;
 		while(i<len(stringEntered)):
@@ -102,7 +104,7 @@ class Calcule:
 	def dimMaximalEntered(self, listGeneralDim: list) -> int:
 
 		# TODO TESITNG
-		print(listGeneralDim);
+		# print(listGeneralDim);
 
 		return max(listGeneralDim);
 

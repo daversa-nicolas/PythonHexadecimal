@@ -9,6 +9,13 @@ class transformsSubroutines:
 
 	# END FUNCTION RENDERMAJ
 
+	# leave spaces message
+	def renderNoSpaces(self, strEntered:str) -> str:
+
+		return "".join(strEntered.split());
+
+	# END FUNCTION RENDERMAJ
+
 
 
 

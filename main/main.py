@@ -4,11 +4,14 @@ import re
 
 from calculeNumerique.calcule import Calcule
 
-# DYNAMICALLA NUMPY ARRAY UNDEFINITED
+# DYNAMICALLY NUMPY ARRAY UNDEFINITED
 ARRAYS = np.empty((), dtype= np.chararray, order='F')
 ARRAYHEXA = np.empty((16), dtype= np.chararray, order='F')
 basis_string="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 hexa_string="123456789ABCDEF"
+octa_string="12345678";
+binary_string="01";
+
 
 
 obj_Class=Calcule()
@@ -57,8 +60,6 @@ def main():
 	# OUTPUT HEXA IN STRING
 	listArray = obj_Class.outputOfMatrixForMortels(listArray, ARRAYSTRING);
 
-	print(listArray);
-
 	userInt = obj_Class.trasformStringToInt(decalageCyrpto(len(listArray)));
 
 	listCrypted=[];
@@ -76,10 +77,10 @@ def enterStringUser():
 
 	while(bol==True):
 
-		var = input("Please enter something alphanumerique WITHOUT SPACES or special: ")
+		var = input("Please enter something alphanumerique WITHOUT special char: ")
 
-		if(bool(re.search("^(?=.*[a-zA-Z])[A-Za-z0-9]+$",var)) or
-				re.search("^(?=.*[0-9])[A-Za-z0-9]+$",var)):
+		if(bool(re.search("^(?=.*[a-zA-Z ])[A-Za-z0-9 ]+$",var)) or
+				re.search("^(?=.*[0-9 ])[A-Za-z0-9 ]+$",var)):
 			print("OK YOU STRING IS GOOD , BIENVENU dans zone 51 , A BORD D'UN NAVIRE EXTRATERRESTRE \n"
 				  "ANCIENT VIMANA POUR FAIRE DE LA RETROINGENIERIER EXACTEMENT COMME BOB LAZAR ET E. SNODWEN : \n"
 				  "Elément 115 (applications d’antigravité) \n"
