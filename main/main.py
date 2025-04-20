@@ -13,10 +13,7 @@ octa_string="12345678";
 binary_string="01";
 
 
-
 obj_Class=Calcule()
-
-
 
 def main():
 
@@ -89,7 +86,7 @@ def enterStringUser():
 			bol=False;
 			return var
 		else:
-			print("YOU STRING IS WRONG: warning re-enter");
+			print("YOU STRING IS WRONG: warning re-enter string");
 		#ENDIF
 
 	# END WHILE
