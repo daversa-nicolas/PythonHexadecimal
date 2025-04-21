@@ -6,11 +6,12 @@ from calculeNumerique.calcule import Calcule
 
 # DYNAMICALLY NUMPY ARRAY UNDEFINITED
 ARRAYS = np.empty((), dtype= np.chararray, order='F')
-ARRAYHEXA = np.empty((16), dtype= np.chararray, order='F')
+ARRAYHEXA = np.empty((15, 3), dtype= np.chararray, order='F')
 basis_string="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+# ARRAY HEXA USING FOR ALL HEXA, OCTA, DUAL YIN 0 YANG 1
 hexa_string="123456789ABCDEF"
-octa_string="12345678";
-binary_string="01";
+octa_string="12345678"
+binary_string="01"
 
 
 obj_Class=Calcule()
@@ -19,22 +20,23 @@ def main():
 
 	i=0
 
-	listGeneralDim=[];
+	listGeneralDim=[]
 
 	# ENTER STRING
-	userString=enterStringUser();
+	userString=enterStringUser()
 
 	# DEFINE DIMENTION OF ARRAY
 	# TODO
-	obj_Class.buildinList(userString, listGeneralDim);
-	obj_Class.buildinList(basis_string, listGeneralDim);
-	obj_Class.buildinList(hexa_string, listGeneralDim);
+	obj_Class.buildinList(userString, listGeneralDim)
+	obj_Class.buildinList(basis_string, listGeneralDim)
+	obj_Class.buildinList(hexa_string, listGeneralDim)
 
 	# RESIZE TO DYNAMICAL ARRAY A MIMIMAL USED (iDim, 15, 10) RANK
-	ARRAYSTRING = obj_Class.resizeUndimentionalArray(listGeneralDim, ARRAYS);
+	ARRAYSTRING = obj_Class.resizeUndimentionalArray(listGeneralDim, ARRAYS)
 
-	# ASSIGNEMENT HEXA TO ARRAYH
-	obj_Class.calculeHexaToArray(hexa_string, ARRAYHEXA)
+	tempListHexa=[hexa_string, octa_string, binary_string]
+	# ASSIGNEMENT HEXA,OCTA,DOUAL YIN 0 YANG 1 TO ARRAYH
+	obj_Class.calculeHexaToArray(tempListHexa, ARRAYHEXA)
 
 	# ASSIGNEMENT BASIS TO ARRAYS
 	obj_Class.calculeBasisToArray(basis_string, ARRAYSTRING)
@@ -43,34 +45,34 @@ def main():
 	obj_Class.calculeEnteredToArray(userString, ARRAYSTRING)
 
 	# CALCULE zone 51
-	decimalFounded=0;
+	decimalFounded=0
 
-	# characterIndividual=obj_Class.outputCharString(0,userString);
+	# characterIndividual=obj_Class.outputCharString(0,userString)
 
-	obj_Class.convertAlphaToDecimal(ARRAYSTRING);
+	obj_Class.convertAlphaToDecimal(ARRAYSTRING)
 
 
 	# ASSIGNEMENT FROM DECIMAL TO HEXA
-	obj_Class.tranformDecimalToHexa(ARRAYSTRING,ARRAYHEXA);
+	obj_Class.tranformDecimalToHexa(ARRAYSTRING,ARRAYHEXA)
 
-	listArray = [];
+	listArray = []
 	# OUTPUT HEXA IN STRING
-	listArray = obj_Class.outputOfMatrixForMortels(listArray, ARRAYSTRING);
+	listArray = obj_Class.outputOfMatrixForMortels(listArray, ARRAYSTRING)
 
-	userInt = obj_Class.trasformStringToInt(decalageCyrpto(len(listArray)));
+	userInt = obj_Class.trasformStringToInt(decalageCyrpto(len(listArray)))
 
-	listCrypted=[];
+	listCrypted=[]
 
 	# CYPTAGE ELEMENTS
-	listCrypted=obj_Class.cryptoElementSuliman(userInt, listArray, ARRAYHEXA);
-	print(listCrypted);
+	listCrypted=obj_Class.cryptoElementSuliman(userInt, listArray, ARRAYHEXA)
+	print(listCrypted)
 
 #ENDDEFMAIN
 
 
 def enterStringUser():
 
-	bol=True;
+	bol=True
 
 	while(bol==True):
 
@@ -82,11 +84,11 @@ def enterStringUser():
 				  "ANCIENT VIMANA POUR FAIRE DE LA RETROINGENIERIER EXACTEMENT COMME BOB LAZAR ET E. SNODWEN : \n"
 				  "Elément 115 (applications d’antigravité) \n"
 				  "https://www.dailymotion.com/video/x18q4bp \n"
-				  "https://www.youtube.com/watch?v=ypHNy2-JC-Q");
-			bol=False;
+				  "https://www.youtube.com/watch?v=ypHNy2-JC-Q")
+			bol=False
 			return var
 		else:
-			print("YOU STRING IS WRONG: warning re-enter string");
+			print("YOU STRING IS WRONG: warning re-enter string")
 		#ENDIF
 
 	# END WHILE
@@ -96,13 +98,13 @@ def enterStringUser():
 
 
 
-def decalageCyrpto(lenListArray: int)->int:
+def decalageCyrpto(lenListArray: int)->str:
 
 
 	varInt=input("Please enter le KEY DECALAGE DE CRYPTAGE CESAER ENTRE 1 ET " +
-				 str(lenListArray-1) + "\n");
+				 str(lenListArray-1) + "\n")
 
-	return varInt;
+	return varInt
 
 # END DECALAGE
 
