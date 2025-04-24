@@ -109,6 +109,23 @@ def decalageCyrpto(lenListArray: int)->str:
 # END DECALAGE
 
 
+	# SUROUTINE QUESTIONS BASES
+	def proposeBases():
+
+		varBases = input("Please enter le BASES OF CONVERTION STRING ")
+
+		# TODO SWITCH
+
+		return None
+
+	# END FUNCTION
+
+
+
+
+
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
 	main()

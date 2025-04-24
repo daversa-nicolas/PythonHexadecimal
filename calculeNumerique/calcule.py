@@ -269,13 +269,14 @@ class Calcule:
 			self.assignementToListHexa(self.trasformStringToInt(ARRAYS[i][3][0]), listTemp)
 			# print(listTemp)
 			listTemp = self.leaveNullFromList(listTemp)
-			# print(listTemp)
+			# print(listTemp) FONCTION THAT TRANSFORM A POSITIONAL INDEX IN listTemp TO HEXA
 			listTemp = self.listPositionalToHexa(listTemp, ARRAYH)
 
 			j=0
 			while (j<len(listTemp)):
 
 				# 3 DIM UTILISED TO ASSIGNEMENT THE j-EME ELEMENT HEXA FINAL CHAR ELEMENT TO iEME CHAR SAISI BY USER
+				# THE iEME POSITIONAL HEXA IS ONE BY ONE CHAR INVERTED IN THIRDY DIMENTION
 				# Z -> 26 -> TODO
 				ARRAYS[i][4][j]=listTemp[len(listTemp)-1-j]
 				# print(listTemp[j])
@@ -293,6 +294,8 @@ class Calcule:
 		return None
 
 	# ENDTRANSFORMDECIMAL
+
+
 
 	# RECURSIVE FUNCTION TO RETURN A LIST OF HEXA CHAR
 	# THE QUOTIENT IS ELEMENT DUMMY ARGUMENT
@@ -325,7 +328,7 @@ class Calcule:
 
 	# END DECIMAL
 
-	# THE ELEMENT OF LIST IS THE POSITIONAL HEXA
+	# THE ELEMENT OF LIST IS THE POSITIONAL HEXA ORIGINAL ET NOT INVERSED
 	def listPositionalToHexa(self, listTempArg: list, ARRAYH: np.chararray) -> list:
 
 		obj_calcule = Calcule()
