@@ -44,7 +44,8 @@ class Calcule:
 
 	# END DEF
 
-
+	# ORIGINAL STRING HEXA,OCTA,DOUAL YIN 0 YANG 1 : TAO TO CHING
+	# ASSIGNEMENT STRING TO ARRAY DUAL, OCTA, HEXA
 	def calculeHexaToArray(self, tempListOfHexas: list,
 						   ARRAYH: numpy.chararray) -> None :
 
@@ -158,7 +159,9 @@ class Calcule:
 			# ARRAYS[i][0][0] = basisString[i]
 			# NUMBER ASSOCIATED 1 DIM FOR BASIS
 			# ARRAYS[i][1][0] = i + 1
-			# NUMBER ASSIGNED IN 3 DIM FOR ENTERED
+			# ALPHA ENTERED ASSIGNED IN 2 DIM FOR ENTERED
+			# ARRAYS[i][2][0]
+			# ALPHA ENTERED TO DECIMAL POSITION ASSIGNED IN 3 DIM
 			# ARRAYS[i][3][0]
 
 			j = 0
@@ -179,6 +182,7 @@ class Calcule:
 	# END IEMEALPHAMATCH
 
 	# VERIFY THE CONVERTION THE ALPHA ENTRY TO DECIMAL OUTPUT
+	# TRANSFORM ALPHA ENTRY TO POSITION
 	def iemeAlphaMatchJemeDecimal(self, iEme: int, jEme: int, verifyElement: bool,
 								  ARRAYS: np.chararray) -> None:
 
@@ -204,8 +208,8 @@ class Calcule:
 	# END FUNCTION iemeAlphaMatchJemeDecimal
 
 
-	# FUNCTION VERIFY EMPTY OR CHAR SPECIAL
-	# RETURN BOOLEAN TRUE IF NOT FOUND EMPTY OR SPECIAL
+	# FUNCTION VERIFY EMPTY CHAR
+	# RETURN BOOLEAN TRUE IF NOT FOUND EMPTY
 	def functionIsEmptySpecial(self, emeElement: int, varElement, ARRAYS: np.chararray) -> bool:
 
 		# TEST
@@ -266,7 +270,7 @@ class Calcule:
 			listTemp = []
 			del listTemp[:]
 			# self.assignementToListHexa(self.trasformStringToInt(self.trasformByteToString(ARRAYS[i][3][0])), listTemp)
-			self.assignementToListHexa(self.trasformStringToInt(ARRAYS[i][3][0]), listTemp)
+			self.assignementToListHexa(self.obj_ClassTransforms.trasformStringToInt(ARRAYS[i][3][0]), listTemp)
 			# print(listTemp)
 			listTemp = self.leaveNullFromList(listTemp)
 			# print(listTemp) FONCTION THAT TRANSFORM A POSITIONAL INDEX IN listTemp TO HEXA
@@ -369,14 +373,6 @@ class Calcule:
 		#return int.from_bytes(varElementByte, byteorder='little', signed=False)
 		return list(varElementByte)
 	# END TRANFORMBYTETOINT
-
-
-	def trasformStringToInt(self, varElementString: str) -> int:
-
-		return int(varElementString)
-
-	# END TRANFORMESTRINGTOINT
-
 
 	def outputOfMatrixForMortels(self, arrayList: list, ARRAYS: np.chararray)->list:
 

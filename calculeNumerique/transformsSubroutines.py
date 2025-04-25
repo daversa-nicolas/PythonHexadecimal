@@ -17,8 +17,11 @@ class transformsSubroutines:
 	# END FUNCTION RENDERMAJ
 
 
+	def trasformStringToInt(self, varElementString: str) -> int:
 
+		return int(varElementString)
 
+	# END TRANFORMESTRINGTOINT
 
 
 
