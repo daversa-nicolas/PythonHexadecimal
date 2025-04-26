@@ -30,7 +30,7 @@ def main():
 	userString=enterStringUser()
 
 	# ENTER BASES FROM USER
-	# strBases=outputBases(askingBases())
+	strBases=outputBases(askingBases())
 
 
 	# DEFINE DIMENTION OF ARRAY
@@ -62,7 +62,7 @@ def main():
 
 	# ASSIGNEMENT FROM DECIMAL TO HEXA,OCTA,DUAL
 	# HERE DUMMY ARGUMENT OF CHOIX IN HEXA,OCTA,DUAL
-	obj_Class.tranformDecimalToHexa(ARRAYSTRING,ARRAYHEXA)
+	obj_Class.tranformDecimalToHexa(strBases, ARRAYSTRING, ARRAYHEXA)
 
 	listArray = []
 	# OUTPUT HEXA IN STRING

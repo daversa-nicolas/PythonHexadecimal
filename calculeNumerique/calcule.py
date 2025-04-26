@@ -243,7 +243,7 @@ class Calcule:
 	#
 	# #END TRANSFORM
 
-	def tranformDecimalToHexa(self, ARRAYS: np.chararray, ARRAYH: np.chararray) -> None:
+	def tranformDecimalToHexa(self, bases: str, ARRAYS: np.chararray, ARRAYH: np.chararray) -> None:
 
 		# obj_calcule = Calcule()
 
@@ -270,10 +270,11 @@ class Calcule:
 			listTemp = []
 			del listTemp[:]
 			# self.assignementToListHexa(self.trasformStringToInt(self.trasformByteToString(ARRAYS[i][3][0])), listTemp)
-			self.assignementToListHexa(self.obj_ClassTransforms.trasformStringToInt(ARRAYS[i][3][0]), listTemp)
+			self.assignementToListHexa(self.obj_ClassTransforms.trasformStringToInt(bases),
+									   self.obj_ClassTransforms.trasformStringToInt(ARRAYS[i][3][0]), listTemp)
 			# print(listTemp)
 			listTemp = self.leaveNullFromList(listTemp)
-			# print(listTemp) FONCTION THAT TRANSFORM A POSITIONAL INDEX IN listTemp TO HEXA
+			print(listTemp) FONCTION THAT TRANSFORM A POSITIONAL INDEX IN listTemp TO HEXA
 			listTemp = self.listPositionalToHexa(listTemp, ARRAYH)
 
 			j=0
@@ -302,14 +303,19 @@ class Calcule:
 
 
 	# RECURSIVE FUNCTION TO RETURN A LIST OF HEXA CHAR
+	# THE APPLICATION IS OPEN TO EXTENSION AND CLOSED TO MODIFICATION
 	# THE QUOTIENT IS ELEMENT DUMMY ARGUMENT
-	def assignementToListHexa(self, numberDec: int, listTemporary: list) -> str:
+	def assignementToListHexa(self, bases: int, numberDec: int, listTemporary: list) -> str:
+
+		print(listTemporary)
 
 		obj_calcule = Calcule()
 		i=0
 
+		print(bases)
+
 		# TEMP LIST FOR INVERTER
-		numberDecimalRest = numberDec % 16
+		numberDecimalRest = numberDec % bases
 
 		if (numberDec == 0):
 
@@ -319,20 +325,21 @@ class Calcule:
 
 		listTemporary.append(numberDecimalRest)
 
-		numberQuotient = numberDec // 16
+		numberQuotient = numberDec // bases
 
-		return listTemporary.append(obj_calcule.assignementToListHexa(numberQuotient, listTemporary))
+		return listTemporary.append(obj_calcule.assignementToListHexa(bases, numberQuotient, listTemporary))
 
 	# END ASSIGNMENTLISTFUCNTION
 
 	# TRANSFORM POSITIONAL TO HEXA
 	def decimalRestToHexaChar(self, rest, ARRAYH: np.chararray) -> str:
-
+		# TODO IF bases is 2,8 and 16
 		return ARRAYH[rest-1][0]
 
 	# END DECIMAL
 
 	# THE ELEMENT OF LIST IS THE POSITIONAL HEXA ORIGINAL ET NOT INVERSED
+	# DUMMY ARGUMENT BASES HERE
 	def listPositionalToHexa(self, listTempArg: list, ARRAYH: np.chararray) -> list:
 
 		obj_calcule = Calcule()
@@ -341,6 +348,7 @@ class Calcule:
 
 		while(i<len(listTempArg)):
 
+			# DUMMY ARGUMENT BASES HERE
 			listTempArg[i]=obj_calcule.decimalRestToHexaChar(listTempArg[i], ARRAYH)
 			# print(listTempArg)
 			i = i + 1
