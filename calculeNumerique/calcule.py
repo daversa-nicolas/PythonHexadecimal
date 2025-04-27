@@ -60,6 +60,11 @@ class Calcule:
 			while (j < len(tempListOfHexas[i])):
 
 				# ORIGINAL STRING HEXA,OCTA,DOUAL YIN 0 YANG 1 : TAO TO CHING
+				# tempListHexa = [hexa_string, octa_string, binary_string]
+				# IF bases is 2,8 and 16
+				# 16 is hexa so index 0
+				# 8 is Octa SO INDEX 1
+				# 2 IS DUAL YIN YANG SO 2
 				# ASSING TO ARRAYH
 				ARRAYH[j][i] = tempListOfHexas[i][j]
 
@@ -243,6 +248,7 @@ class Calcule:
 	#
 	# #END TRANSFORM
 
+	# FONCTION THAT TRANSFORM A POSITIONAL INDEX IN listTemp TO HEXA
 	def tranformDecimalToHexa(self, bases: str, ARRAYS: np.chararray, ARRAYH: np.chararray) -> None:
 
 		# obj_calcule = Calcule()
@@ -270,12 +276,21 @@ class Calcule:
 			listTemp = []
 			del listTemp[:]
 			# self.assignementToListHexa(self.trasformStringToInt(self.trasformByteToString(ARRAYS[i][3][0])), listTemp)
-			self.assignementToListHexa(self.obj_ClassTransforms.trasformStringToInt(bases),
-									   self.obj_ClassTransforms.trasformStringToInt(ARRAYS[i][3][0]), listTemp)
-			# print(listTemp)
+			# TODO BOOLEAN
+			firstRecursion=0
+			decimalChar: int
+			if(type(ARRAYS[i][3][0])==str):
+				decimalChar=self.obj_ClassTransforms.trasformStringToInt(ARRAYS[i][3][0])
+			elif(type(ARRAYS[i][3][0])==int):
+				decimalChar=ARRAYS[i][3][0]
+
+			self.assignementToListHexa(firstRecursion, self.obj_ClassTransforms.trasformStringToInt(bases),
+									   decimalChar, listTemp)
+			print(listTemp)
 			listTemp = self.leaveNullFromList(listTemp)
-			print(listTemp) FONCTION THAT TRANSFORM A POSITIONAL INDEX IN listTemp TO HEXA
-			listTemp = self.listPositionalToHexa(listTemp, ARRAYH)
+			print(listTemp)
+			# TODO DUMMY
+			listTemp = self.listPositionalToHexa(bases, listTemp, ARRAYH)
 
 			j=0
 			while (j<len(listTemp)):
@@ -305,42 +320,66 @@ class Calcule:
 	# RECURSIVE FUNCTION TO RETURN A LIST OF HEXA CHAR
 	# THE APPLICATION IS OPEN TO EXTENSION AND CLOSED TO MODIFICATION
 	# THE QUOTIENT IS ELEMENT DUMMY ARGUMENT
-	def assignementToListHexa(self, bases: int, numberDec: int, listTemporary: list) -> str:
+	def assignementToListHexa(self, i:int, bases: int, numberDec: int,
+							  listTemporary: list) -> str:
 
-		print(listTemporary)
+
+		# print(listTemporary)
 
 		obj_calcule = Calcule()
-		i=0
+		# TODO USING BOOLEAN BETTER
+		#valBolInRecurtion=valBolOutRecursion
 
-		print(bases)
+		# print(bases)
 
 		# TEMP LIST FOR INVERTER
 		numberDecimalRest = numberDec % bases
 
-		if (numberDec == 0):
-
-			return None
-
+		# TODO REFACTORING
+		if (numberDec==0 and numberDecimalRest ==0):
+			if(i==0):
+				listTemporary.append(numberDecimalRest)
+				return None
+			else:
+				return None
+			# ENS IF
 		# END IF
 
 		listTemporary.append(numberDecimalRest)
 
 		numberQuotient = numberDec // bases
 
-		return listTemporary.append(obj_calcule.assignementToListHexa(bases, numberQuotient, listTemporary))
+		i=i+1
+
+		return listTemporary.append(obj_calcule.assignementToListHexa(i, bases, numberQuotient, listTemporary))
 
 	# END ASSIGNMENTLISTFUCNTION
 
 	# TRANSFORM POSITIONAL TO HEXA
-	def decimalRestToHexaChar(self, rest, ARRAYH: np.chararray) -> str:
-		# TODO IF bases is 2,8 and 16
-		return ARRAYH[rest-1][0]
+
+	def decimalRestToHexaChar(self, baseArray: int, rest: int, ARRAYH: np.chararray) -> str:
+		# print(baseArray)
+		# TODO REFACTORING SEQUENCY CONDITIONAL
+		# IF bases is 2,8 and 16
+		# 16 is hexa so index 0
+		# 8 is Octa SO INDEX 1
+		# 2 IS DUAL YIN YANG SO 2
+		varRank=0
+		if(baseArray == "16"):
+			varRank=0
+		elif(baseArray == "8"):
+			varRank=1
+		elif(baseArray == "2"):
+			varRank=2
+		# END IF
+		# TODO TESTING WITH 16
+		return ARRAYH[rest][varRank]
 
 	# END DECIMAL
 
 	# THE ELEMENT OF LIST IS THE POSITIONAL HEXA ORIGINAL ET NOT INVERSED
 	# DUMMY ARGUMENT BASES HERE
-	def listPositionalToHexa(self, listTempArg: list, ARRAYH: np.chararray) -> list:
+	def listPositionalToHexa(self, baseArray: int, listTempArg: list, ARRAYH: np.chararray) -> list:
 
 		obj_calcule = Calcule()
 
@@ -349,7 +388,9 @@ class Calcule:
 		while(i<len(listTempArg)):
 
 			# DUMMY ARGUMENT BASES HERE
-			listTempArg[i]=obj_calcule.decimalRestToHexaChar(listTempArg[i], ARRAYH)
+			listTempArg[i]=obj_calcule.decimalRestToHexaChar(baseArray,
+															 self.obj_ClassTransforms.trasformStringToInt(listTempArg[i]),
+															 ARRAYH)
 			# print(listTempArg)
 			i = i + 1
 
@@ -389,7 +430,8 @@ class Calcule:
 		i=0
 
 		# ITERATION AT LEAST ONE ONCE NOT POSSIBLE IN PYTHON AS FORTRAN, JAVA OR LISP, SO NEED TO
-		# FUNCTION verifyElement THAT IS TRUE RETURN AT FIRST END REVERIFIED TO EACH ITERATION AT THE AND OF LOOP
+		# FUNCTION verifyElement THAT IS TRUE RETURN AT FIRST END REVERIFIED TO EACH ITERATION
+		# AT THE AND OF LOOP
 		verifyElement = self.functionIsEmptySpecial(i, (ARRAYS[i][3][0]),
 													ARRAYS)
 
@@ -417,6 +459,7 @@ class Calcule:
 
 		# END WHILE
 
+		print("ARRAY LIST OF ENTERED CHAR TRANSFORMED IN BASES CHOISIE")
 		print(arrayList)
 
 		return arrayList

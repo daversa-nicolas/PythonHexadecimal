@@ -5,17 +5,17 @@ from calculeNumerique.transformsSubroutines import transformsSubroutines
 
 # DYNAMICALLY NUMPY ARRAY UNDEFINITED
 ARRAYS = np.empty((), dtype= np.chararray, order='F')
-ARRAYHEXA = np.empty((15, 3), dtype= np.chararray, order='F')
+ARRAYHEXA = np.empty((16, 3), dtype= np.chararray, order='F')
 basis_string="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 # ARRAY HEXA USING FOR ALL HEXA, OCTA, DUAL YIN 0 YANG 1
-hexa_string="123456789ABCDEF"
-octa_string="12345678"
+hexa_string="0123456789ABCDEF"
+octa_string="01234567"
 binary_string="01"
 
 # PROGRAM TO TRANFORM A STRING CHAR USER IN POSITIONAL  DECIMAL
 # AND POSITIONAL DECIMAL IN CHOISIS BASES 2,8 OR 16
 # AUTHOR : NICOLAS DAVERSA
-# MAIL CONTRIBUTORS : NICOLAVERSA@LIBERO.IT
+# MAIL CONTRIBUTORS TO : NICOLAVERSA@LIBERO.IT
 
 obj_Class=Calcule()
 obj_Transforms=transformsSubroutines()
